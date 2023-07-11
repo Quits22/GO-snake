@@ -18,5 +18,5 @@ CREATE TABLE userscores (
 );
 change the env file based on your database info
 
-go build -buildvcs=false in the server server then run the .exe
+go build the server then run the server.exe
 then do the same in the client folder
