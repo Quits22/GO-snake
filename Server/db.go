@@ -76,7 +76,7 @@ func (store *dbStore) createPlayer(playerName string) (int, error) {
 
 func (store *dbStore) GetScores() ([]*Score, error) {
 	// Query the database for all highscores, and return the highst score but only one score from each person is taken
-	rows, err := store.db.Query("SELECT u.username, us.score, us.scoreDate FROM userscores us JOIN userdata u ON u.userID = us.userID WHERE (us.userID, us.score) IN (SELECT us2.userID, MAX(us2.score) FROM userscores us2 GROUP BY us2.userID)")
+	rows, err := store.db.Query("SELECT u.username, us.score, us.scoreDate FROM userscores us JOIN userdata u ON u.userID = us.userID WHERE (us.userID, us.score) IN (SELECT us2.userID, MAX(us2.score) FROM userscores us2 GROUP BY us2.userID) ORDER BY us.score DESC")
 	// Return in case of an error, and defer the closing of the row structure
 	if err != nil {
 		return nil, err
